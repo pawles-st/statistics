@@ -53,22 +53,16 @@ boxplot(pensja ~ wykszt, edu.data)
 # problem 5
 
 pts <- seq(total.summary$min, total.summary$max, length = 50)
-gamma.dist <- dgamma(pts, shape = 3.5, scale = 1.5)
+gamma.dist <- dgamma(pts, shape = 3.5, scale = 15)
 
 hist(edu.data$pensja, prob = TRUE)
-lines(pts, gamma.dist, col = 2, lwd = 3)
-lines(density(edu.data$pensja))
+lines(pts, gamma.dist, lwd = 3)
 
-fd.classes <- ceiling((total.summary$max - total.summary$min) / (2 * total.summary$iqr / nrow(edu.data) ^ (1/3)))
+fd.classes <- ceiling((total.summary$max - total.summary$min))
 
-hist(edu.data$pensja, breaks = fd.classes, prob = TRUE)
-lines(pts, gamma.dist, col = 2, lwd = 3)
-lines(density(edu.data$pensja))
 
-# problem 6
 
-race.edu <- table(edu.data$rasa, edu.data$wykszt)
-race.edu <- 
+edu.data[1, ]
 
-help("table")
+help("dgamma")
 
