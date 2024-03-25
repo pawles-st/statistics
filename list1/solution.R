@@ -4,7 +4,8 @@ edu.data <- read.table("lab1_dane.txt", dec = ",", header = TRUE)
 
 type.count <- table(edu.data$typ)
 percentages <- paste0(round(100 * type.count / sum(type.count), 2), "%")
-pie(type.count, labels = percentages, col = rainbow(6))
+dev.new(width = 10, height = 10)
+pie(type.count, labels = percentages, col = rainbow(6), pin = c(50, 50))
 legend("topleft", legend = c("kierownik", "sprzedawca/marketing", "urzędnik", "obsługa", "wolny zawód", "inne"), fill = rainbow(6))
 
 # problem 2
@@ -39,7 +40,7 @@ pension.summary <- function(d) {
 	pension$q3 <- quantile(d$pensja, probs = 0.75)
 	pension$iqr <- pension$q3 - pension$q1
 	pension$var <- var(d$pensja)
-	pension$std <- sqrt(pension.variance)
+	pension$std <- sqrt(pension$var)
 	pension$min <- min(d$pensja)
 	pension$max <- max(d$pensja)
 	return(pension)
@@ -47,12 +48,15 @@ pension.summary <- function(d) {
 
 total.summary <- pension.summary(edu.data)
 classes.summary <- rbind(pension.summary(edu.data[edu.data$wykszt == 1,]), pension.summary(edu.data[edu.data$wykszt == 2,]), pension.summary(edu.data[edu.data$wykszt == 3,]))
+total.summary
+classes.summary
 
 boxplot(pensja ~ wykszt, edu.data)
 
 # problem 5
 
 pts <- seq(total.summary$min, total.summary$max, length = 50)
+
 gamma.dist <- dgamma(pts, shape = 3.5, scale = 1.5)
 
 hist(edu.data$pensja, prob = TRUE)
@@ -67,8 +71,12 @@ lines(density(edu.data$pensja))
 
 # problem 6
 
+edu.data
 race.edu <- table(edu.data$rasa, edu.data$wykszt)
-race.edu <- 
 
-help("table")
+total.count <- sum(race.edu)
+race.edu <- race.edu / total.count
+race.edu
+
+help("boxplot")
 
