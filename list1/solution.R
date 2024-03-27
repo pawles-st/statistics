@@ -73,9 +73,7 @@ lines(density(edu.data$pensja))
 
 edu.data
 race.edu <- table(edu.data$rasa, edu.data$wykszt)
-
-total.count <- sum(race.edu)
-race.edu <- race.edu / total.count
+race.edu <- prop.table(race.edu, margin = 1)
 race.edu
 
 help("boxplot")
