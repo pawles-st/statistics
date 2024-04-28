@@ -9,7 +9,7 @@ pts <- seq(min(var.data$X1), max(var.data$X1), length = 50)
 #distrib1 <- dnorm(pts, mean = 0, sd = 1)
 distrib2 <- dnorm(pts, mean = 0.2, sd = 0.9)
 #lines(pts, distrib1, col = 2, lwd = 3)
-lines(pts, distrib2, col = 3, lwd = 3)
+lines(pts, distrib2, col = 2, lwd = 3)
 lines(density(var.data$X1))
 dev.off()
 
@@ -67,19 +67,34 @@ q.normal = qnorm(quantiles, mean = 1, sd = 2)
 q.exp = qexp(quantiles, rate = 2)
 q.beta = qbeta(quantiles, shape1 = 1, shape2 = 1)
 
+norm.q <- function(x) {
+	return(qnorm(x, mean = 1, sd = 2))
+}
+
+exp.q <- function(x) {
+	return(qexp(x, rate = 2))
+}
+
+beta.q <- function(x) {
+	return(qbeta(x, shape1 = 1, shape2 = 1))
+}
+
 jpeg("qq-normal-normal.jpeg")
 qqplot(q.normal, normal.sample, main = "QQPlot: teoretyczny rozkład normalny/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-abline(0, 1)
+qqline(q.normal, distribution = norm.q)
+#abline(0, 1)
 dev.off()
 
 jpeg("qq-exp-normal.jpeg")
 qqplot(q.exp, normal.sample, main = "QQPlot: teoretyczny rozkład wykładniczy/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-abline(0, 1)
+qqline(q.normal, distribution = norm.q)
+#abline(0, 1)
 dev.off()
 
 jpeg("qq-beta-normal.jpeg")
 qqplot(q.beta, normal.sample, main = "QQPlot: teoretyczny rozkład beta/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-abline(0, 1)
+qqline(q.normal, distribution = norm.q)
+#abline(0, 1)
 dev.off()
 
 jpeg("qq-normal-exp.jpeg")
@@ -123,9 +138,10 @@ sample.4 <- rnorm(sample.size, mean = 1, sd = 3)
 samples <- data.frame(sample.1, sample.2, sample.3, sample.4)
 
 jpeg("norm-box.jpeg")
-boxplot(samples, main = "Boxplot dla próbek z rozkładów normalnych")
+boxplot(samples, main = "Boxplot dla próbek z rozkładów normalnych", names = c("N(0, 1)", "N(0, 2)", "N(1, 1)", "N(1, 3^2)"), ylim = c(-10, 12))
+grid(nx = 24)
 dev.off()
 
 summary(sample.1)
 
-help(grid)
+help(qqline)
