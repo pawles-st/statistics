@@ -80,50 +80,47 @@ beta.q <- function(x) {
 }
 
 jpeg("qq-normal-normal.jpeg")
-qqplot(q.normal, normal.sample, main = "QQPlot: teoretyczny rozkład normalny/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-qqline(q.normal, distribution = norm.q)
-#abline(0, 1)
+qqplot(q.normal, normal.sample, main = "QQPlot: próba z rozkładu normalneg/\noteoretyczny rozkład normalny", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+abline(0, 1)
 dev.off()
 
 jpeg("qq-exp-normal.jpeg")
-qqplot(q.exp, normal.sample, main = "QQPlot: teoretyczny rozkład wykładniczy/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-qqline(q.normal, distribution = norm.q)
-#abline(0, 1)
+qqplot(q.exp, normal.sample, main = "QQPlot: próba z rozkładu normalnego/\nteoretyczny rozkład wykładniczy", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+abline(0, 1)
 dev.off()
 
 jpeg("qq-beta-normal.jpeg")
-qqplot(q.beta, normal.sample, main = "QQPlot: teoretyczny rozkład beta/\npróbka z rozkładu normalnego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
-qqline(q.normal, distribution = norm.q)
-#abline(0, 1)
+qqplot(q.beta, normal.sample, main = "QQPlot: próba z rozkładu normalnego/\nteoretyczny rozkład beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+abline(0, 1)
 dev.off()
 
 jpeg("qq-normal-exp.jpeg")
-qqplot(q.normal, exp.sample, main = "QQPlot: teoretyczny rozkład normalny/\npróbka z rozkładu wykładniczego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.normal, exp.sample, main = "QQPlot: próba z rozkładu wykładniczego/\nteoretyczny rozkład normalny", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
 jpeg("qq-exp-exp.jpeg")
-qqplot(q.exp, exp.sample, main = "QQPlot: teoretyczny rozkład wykładniczego/\npróbka z rozkładu wykładniczego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.exp, exp.sample, main = "QQPlot: próba z rozkładu wykładniczego/\nteoretyczny rozkład wykładniczego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
 jpeg("qq-beta-exp.jpeg")
-qqplot(q.beta, exp.sample, main = "QQPlot: teoretyczny rozkład beta/\npróbka z rozkładu wykładniczego", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.beta, exp.sample, main = "QQPlot: próba z rozkładu wykładniczego/\nteoretyczny rozkład beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
 jpeg("qq-normal-beta.jpeg")
-qqplot(q.normal, beta.sample, main = "QQPlot: teoretyczny rozkład normalny/\npróbka z rozkładu beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.normal, beta.sample, main = "QQPlot: próba z rozkładu beta/\nteoretyczny rozkład normalny", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
 jpeg("qq-exp-beta.jpeg")
-qqplot(q.exp, beta.sample, main = "QQPlot: teoretyczny rozkład wykładniczy/\npróbka z rozkładu beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.exp, beta.sample, main = "QQPlot: próba z rozkładu beta/\nteoretyczny rozkład wykładniczy", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
 jpeg("qq-beta-beta.jpeg")
-qqplot(q.beta, beta.sample, main = "QQPlot: teoretyczny rozkład beta/\npróbka z rozkładu beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
+qqplot(q.beta, beta.sample, main = "QQPlot: próba z rozkładu beta/\nteoretyczny rozkład beta", xlab = "Kwantyle teoretyczne", ylab = "Kwantyle próbkowe")
 abline(0, 1)
 dev.off()
 
