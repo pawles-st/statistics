@@ -9,19 +9,20 @@ sample.size <- 100
 png("norm_cdf.png")
 norm.sample <- rnorm(sample.size)
 x.values <- seq(min(norm.sample), max(norm.sample), by = 0.01)
-plot(x.values, sapply(x.values, sample.cdf, s = norm.sample) / sample.size, main = "Porównanie dystrybuanty rozkładu normalnego\nz dystrybuantą empiryczną próby", ylab = "wartość dystrybuanty", xlab = "punkt")
+plot(x.values, sapply(x.values, sample.cdf, s = norm.sample) / sample.size, main = "Porównanie dystrybuanty rozkładu normalnego\nz dystrybuantą empiryczną próby", ylab = "wartość dystrybuanty", xlab = "punkt", type = "l")
 lines(x.values, pnorm(x.values), lwd = 3, col = 2)
 dev.off()
 
 png("exp_cdf.png")
 exp.sample <- rexp(sample.size)
 x.values <- seq(min(exp.sample), max(exp.sample), by = 0.01)
-plot(x.values, sapply(x.values, sample.cdf, s = exp.sample) / sample.size, main = "Porównanie dystrybuanty rozkładu wykładniczego\nz dystrybuantą empiryczną próby", ylab = "wartość dystrybuanty", xlab = "punkt")
+plot(x.values, sapply(x.values, sample.cdf, s = exp.sample) / sample.size, main = "Porównanie dystrybuanty rozkładu wykładniczego\nz dystrybuantą empiryczną próby", ylab = "wartość dystrybuanty", xlab = "punkt", type = "l")
 lines(x.values, pexp(x.values), lwd = 3, col = 2)
 dev.off()
 
 # problem 2
 
+sample.size <- 100
 no.reps <- 1000
 alpha <- 0.05
 eps <- sqrt(log(2 / alpha) / 2 / sample.size)
@@ -30,21 +31,19 @@ norm.confidence <- 0
 exp.confidence <- 0
 
 for (i in 1:no.reps) {
-
 	norm.sample <- rnorm(sample.size)
-	x.values <- seq(min(norm.sample), max(norm.sample), by = 0.01)
-	if (all(abs(sapply(x.values, sample.cdf, s = norm.sample) / sample.size - pnorm(x.values)) <= eps)) {
+	norm.ecdf <- ecdf(norm.sample)
+	if (all(abs(norm.ecdf(norm.sample) - pnorm(norm.sample)) <= eps)) {
 		norm.confidence <- norm.confidence + 1
 	}
 
 	exp.sample <- rexp(sample.size)
-	x.values <- seq(min(exp.sample), max(exp.sample), by = 0.01)
-	if (all(abs(sapply(x.values, sample.cdf, s = exp.sample) / sample.size - pexp(x.values)) <= eps)) {
-		exp.confidence = exp.confidence + 1
+	exp.ecdf <- ecdf(exp.sample)
+	exp.ecdf
+	if (all(abs(exp.ecdf(exp.sample) - pexp(exp.sample)) <= eps)) {
+		exp.confidence <- exp.confidence + 1
 	}
-
 }
-
 norm.confidence
 exp.confidence
 
