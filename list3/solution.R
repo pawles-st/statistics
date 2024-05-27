@@ -39,7 +39,6 @@ for (i in 1:no.reps) {
 
 	exp.sample <- rexp(sample.size)
 	exp.ecdf <- ecdf(exp.sample)
-	exp.ecdf
 	if (all(abs(exp.ecdf(exp.sample) - pexp(exp.sample)) <= eps)) {
 		exp.confidence <- exp.confidence + 1
 	}
@@ -56,7 +55,7 @@ silverman.bw <- 0.9 * min(sd(norm.sample, IQR(norm.sample) / 1.34)) * sample.siz
 x.values <- seq(min(norm.sample), max(norm.sample), by = 0.1)
 
 png("kernel.png")
-plot(x.values, dnorm(x.values), type = "l", lwd = 3)
+plot(x.values, dnorm(x.values), type = "l", lwd = 3, main = "Porównanie estymatorów jądrowych\nw zależności od szerokości pasma", xlab = "punkt", ylab = "wartość gęstości")
 d1 <- density(norm.sample, bw = 1)
 lines(d1, col = 2)
 d2 <- density(norm.sample, bw = 0.5)
@@ -94,10 +93,9 @@ rmix <- function(n) {
 mix.sample <- rmix(sample.size)
 
 x.values <- seq(min(mix.sample), max(mix.sample), by = 0.1)
-h <- hist(mix.sample, breaks = "Freedman-Diaconis")
 png("mix.png")
-plot(x.values, 0.4 * dnorm(x.values) + 0.4 * dnorm(x.values, mean = 2, sd = 1) + 0.2 * dnorm(x.values, mean = 4, sd = 2), type = "l", lwd = 3)
-lines(h$mids, h$density, type = "h", lwd = 18, col = "gray", lend = 1)
+hist(mix.sample, breaks = "Freedman-Diaconis", main = "Porównanie estymatora histogramowego i jądrowego", xlab = "punkt", ylab = "wartość gęstości", probability = TRUE)
+lines(x.values, 0.4 * dnorm(x.values) + 0.4 * dnorm(x.values, mean = 2, sd = 1) + 0.2 * dnorm(x.values, mean = 4, sd = 2), type = "l", lwd = 3)
 silverman.bw <- 0.9 * min(sd(mix.sample, IQR(mix.sample) / 1.34)) * sample.size^(-1/5)
 d <- density(mix.sample, bw = silverman.bw)
 lines(d, col = 3, lwd = 3)
