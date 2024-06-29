@@ -19,12 +19,16 @@ for (n in n.range) {
 	}
 }
 
-coverage.pbb <- coverage.pbb[n.range]
 coverage.pbb <- round(coverage.pbb, digits = 3)
+for (n in n.range) {
+	cat(noquote(paste0("n = ", n, ": ", coverage.pbb[n], "\\\\\n")))
+}
+coverage.pbb <- coverage.pbb[n.range]
 
 png("wald.png")
 plot(n.range, coverage.pbb, type = "l")
 abline(a = 1 - alpha, b = 0, col = "red", lwd = 3)
+abline(a = 0.93, b = 0, col = "green", lwd = 3)
 dev.off()
 
 # Wilson CI
@@ -40,8 +44,11 @@ for (n in n.range) {
 	}
 }
 
-coverage.pbb <- coverage.pbb[n.range]
 coverage.pbb <- round(coverage.pbb, digits = 3)
+for (n in n.range) {
+	cat(noquote(paste0("n = ", n, ": ", coverage.pbb[n], "\\\\\n")))
+}
+coverage.pbb <- coverage.pbb[n.range]
 
 png("wilson.png")
 plot(n.range, coverage.pbb, type = "l")
@@ -59,18 +66,22 @@ for (n in n.range) {
 		n.tilde <- n + z^2
 		p.tilde <- k.tilde / n.tilde
 		q.tilde <- 1 - p.tilde
-		if (abs(p.hat - p) <= z * sqrt(p.tilde * q.tilde / n.tilde)) {
+		if (abs(p.tilde - p) <= z * sqrt(p.tilde * q.tilde / n.tilde)) {
 			coverage.pbb[n] = coverage.pbb[n] + dbinom(k, size = n, prob = p)
 		}
 	}
 }
 
-coverage.pbb <- coverage.pbb[n.range]
 coverage.pbb <- round(coverage.pbb, digits = 3)
+for (n in n.range) {
+	cat(noquote(paste0("n = ", n, ": ", coverage.pbb[n], "\\\\\n")))
+}
+coverage.pbb <- coverage.pbb[n.range]
 
 png("agresti-coull.png")
 plot(n.range, coverage.pbb, type = "l")
 abline(a = 1 - alpha, b = 0, col = "red", lwd = 3)
+abline(a = 0.93, b = 0, col = "green", lwd = 3)
 dev.off()
 
 # likelihood quotient CI
@@ -86,14 +97,15 @@ for (n in n.range) {
 	}
 }
 
-coverage.pbb <- coverage.pbb[n.range]
 coverage.pbb <- round(coverage.pbb, digits = 3)
+for (n in n.range) {
+	cat(noquote(paste0("n = ", n, ": ", coverage.pbb[n], "\\\\\n")))
+}
+coverage.pbb <- coverage.pbb[n.range]
 
-png("agresti-coull.png")
+png("likelihood_quotient.png")
 plot(n.range, coverage.pbb, type = "l")
 abline(a = 1 - alpha, b = 0, col = "red", lwd = 3)
 dev.off()
-
-
 
 help("")
